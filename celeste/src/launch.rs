@@ -173,9 +173,9 @@ impl TrayApp {
         file.set_permissions(perms).unwrap();
 
         #[cfg(debug_assertions)]
-        let tray_file = include_bytes!("../../target/debug/celeste-tray");
+        let tray_file = include_bytes!(concat!(env!("CARGO_TARGET_DIR"), "/", "celeste-tray"));
         #[cfg(not(debug_assertions))]
-        let tray_file = include_bytes!("../../target/release/celeste-tray");
+        let tray_file = include_bytes!(concat!(env!("CARGO_TARGET_DIR"), "/", "celeste-tray"));
 
         file.write_all(tray_file).unwrap();
         drop(file);
